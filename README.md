@@ -1,3 +1,4 @@
+
 # HostelHub — Java Backend Edition
 
 HostelHub is a Smart PG & Hostel Management System. This package keeps the existing HTML, CSS, images, and Vanilla JavaScript frontend and adds a Java HTTP backend.
@@ -38,3 +39,7 @@ The existing booking UI continues to use `localStorage` for compatibility with i
 - `Files` and `Path` are used for file handling and persistent booking records.
 - `List`, streams, and lambda expressions are used to read saved records.
 - The frontend sends JSON to the Java backend and receives JSON responses.
+
+# hostelhub_java
+java backend version of hostel hub
+
