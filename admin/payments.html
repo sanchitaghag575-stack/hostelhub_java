@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments | HostelHub Admin</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+<div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar" style="background:#07549b;">
+        <div class="sidebar-brand">🏠 Admin Panel</div>
+        <div class="sidebar-user" id="sidebarUser"></div>
+        <nav>
+            <a href="dashboard.html"     class="sidebar-link">📊 Dashboard</a>
+            <a href="rooms.html"         class="sidebar-link">🛏 Rooms</a>
+            <a href="residents.html"     class="sidebar-link">👥 Residents</a>
+            <a href="allocations.html"   class="sidebar-link">📋 Allocations</a>
+            <a href="payments.html"      class="sidebar-link">💳 Payments</a>
+            <a href="complaints.html"    class="sidebar-link">🔧 Complaints</a>
+            <a href="announcements.html" class="sidebar-link">📢 Announcements</a>
+            <a href="hostels.html"       class="sidebar-link">🏠 My Hostels</a>
+            <a href="booking.html"       class="sidebar-link">📋 Bookings</a>
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+        </nav>
+        <div style="padding:16px 20px;margin-top:auto;border-top:1px solid rgba(255,255,255,0.1);">
+            <button onclick="resetDemoData()" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);padding:7px 14px;border-radius:6px;font-size:0.78rem;cursor:pointer;width:100%;">🔄 Reset Demo Data</button>
+        </div>
+    </aside>
+    <div class="dashboard-content">
+        <div class="dashboard-topbar">
+            <span class="topbar-title">Payment Tracking</span>
+            <span class="topbar-user" id="topbarUser"></span>
+        </div>
+        <main class="dashboard-main">
+            <div id="messageContainer"></div>
+            <div class="stat-cards" style="margin-bottom:24px;">
+                <div class="stat-card"><div class="stat-icon blue">📊</div><div class="stat-info"><h4>Total</h4><div class="stat-value" id="statTotalPayments">—</div></div></div>
+                <div class="stat-card"><div class="stat-icon green">✓</div><div class="stat-info"><h4>Paid</h4><div class="stat-value" id="statPaidPayments">—</div></div></div>
+                <div class="stat-card"><div class="stat-icon yellow">⏳</div><div class="stat-info"><h4>Pending</h4><div class="stat-value" id="statPendingPayments">—</div></div></div>
+                <div class="stat-card"><div class="stat-icon red">⚠</div><div class="stat-info"><h4>Overdue</h4><div class="stat-value" id="statOverduePayments">—</div></div></div>
+            </div>
+            <div class="panel">
+                <div class="panel-header"><h2>All Payments</h2></div>
+                <div style="overflow-x:auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Student</th><th>Room</th><th>Month</th><th>Amount</th><th>Due Date</th><th>Paid Date</th><th>Status</th><th>Action</th></tr>
+                        </thead>
+                        <tbody id="paymentsTableBody">
+                            <tr><td colspan="8" style="text-align:center;padding:32px;color:#667085;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

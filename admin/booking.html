@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bookings | HostelHub</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+
+        .bookings-page {
+            padding: 30px;
+        }
+
+        .bookings-header {
+            margin-bottom: 25px;
+        }
+
+        .bookings-header h1 {
+            margin: 0 0 6px;
+            color: #1f2937;
+        }
+
+        .bookings-header p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .booking-table-container {
+            background: white;
+            border-radius: 14px;
+            overflow-x: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th {
+            background: #07549b;
+            color: white;
+            padding: 14px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 15px 14px;
+            border-bottom: 1px solid #e5e7eb;
+            color: #374151;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .confirmed {
+            display: inline-block;
+            background: #dcfce7;
+            color: #15803d;
+            padding: 5px 9px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .paid {
+            color: #15803d;
+            font-weight: 700;
+        }
+
+        .empty-bookings {
+            background: white;
+            border-radius: 14px;
+            padding: 60px 20px;
+            text-align: center;
+            color: #6b7280;
+        }
+
+        .empty-bookings h2 {
+            color: #374151;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        .summary-label {
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .summary-value {
+            font-size: 25px;
+            font-weight: 700;
+            margin-top: 7px;
+            color: #07549b;
+        }
+
+        @media (max-width: 700px) {
+
+            .bookings-page {
+                padding: 20px 15px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<button
+    class="sidebar-toggle"
+    onclick="toggleSidebar()">
+    ☰
+</button>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+        style="background:#07549b;">
+
+        <div class="sidebar-brand">
+            🏠 HostelHub
+        </div>
+
+        <div class="sidebar-user" id="sidebarUser">
+            <strong>Hostel Owner</strong>
+        </div>
+
+        <nav>
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link">
+                📊 Dashboard
+            </a>
+
+            <a
+                href="rooms.html"
+                class="sidebar-link">
+                🛏️ Rooms
+            </a>
+
+            <a
+                href="residents.html"
+                class="sidebar-link">
+                👥 Residents
+            </a>
+
+            <a
+                href="allocations.html"
+                class="sidebar-link">
+                📋 Allocations
+            </a>
+
+            <a
+                href="payments.html"
+                class="sidebar-link">
+                💳 Payments
+            </a>
+
+            <a
+                href="complaints.html"
+                class="sidebar-link">
+                🛠️ Complaints
+            </a>
+
+            <a
+                href="announcements.html"
+                class="sidebar-link">
+                📢 Announcements
+            </a>
+
+            <a
+                href="hostels.html"
+                class="sidebar-link">
+                🏠 My Hostels
+            </a>
+
+            <a
+                href="booking.html"
+                class="sidebar-link">
+                📋 Bookings
+            </a>
+
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="dashboard-content">
+
+        <div class="bookings-page">
+
+
+            <div class="bookings-header">
+
+                <h1>
+                    Hostel Bookings
+                </h1>
+
+                <p>
+                    View students who have booked
+                    your hostel listings.
+                </p>
+
+            </div>
+
+
+            <div
+                id="summaryGrid"
+                class="summary-grid">
+            </div>
+
+
+            <div
+                id="bookingContainer">
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+
+requireAuth("admin");
+
+
+function toggleSidebar() {
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+    if (sidebar) {
+
+        sidebar.classList.toggle(
+            "active"
+        );
+
+    }
+
+}
+
+
+function getBookings() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "bookings"
+            )
+        ) || [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+function renderBookings() {
+
+    const bookings =
+        getBookings();
+
+
+    /* -----------------------------
+       SUMMARY
+    ----------------------------- */
+
+    const total =
+        bookings.length;
+
+
+    const confirmed =
+        bookings.filter(
+            booking =>
+                booking.bookingStatus ===
+                "Confirmed"
+        ).length;
+
+
+    const revenue =
+        bookings.reduce(
+            function(total, booking) {
+
+                return total +
+                    Number(
+                        booking.amount || 0
+                    );
+
+            },
+            0
+        );
+
+
+    document.getElementById(
+        "summaryGrid"
+    ).innerHTML = `
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Total Bookings
+            </div>
+
+            <div class="summary-value">
+                ${total}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Confirmed
+            </div>
+
+            <div class="summary-value">
+                ${confirmed}
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-label">
+                Booking Value
+            </div>
+
+            <div class="summary-value">
+                ₹${revenue.toLocaleString("en-IN")}
+            </div>
+
+        </div>
+
+    `;
+
+
+    /* -----------------------------
+       EMPTY STATE
+    ----------------------------- */
+
+    if (!bookings.length) {
+
+        document.getElementById(
+            "bookingContainer"
+        ).innerHTML = `
+
+            <div class="empty-bookings">
+
+                <h2>
+                    No bookings yet
+                </h2>
+
+                <p>
+                    Student bookings will appear
+                    here after a hostel is booked.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    /* -----------------------------
+       TABLE
+    ----------------------------- */
+
+    document.getElementById(
+        "bookingContainer"
+    ).innerHTML = `
+
+        <div class="booking-table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Booking ID
+                        </th>
+
+                        <th>
+                            Student
+                        </th>
+
+                        <th>
+                            Hostel
+                        </th>
+
+                        <th>
+                            Sharing
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Payment
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    ${
+                        bookings
+                        .slice()
+                        .reverse()
+                        .map(
+                            function(booking) {
+
+                                const date =
+                                    booking.date
+                                        ? new Date(
+                                            booking.date
+                                        ).toLocaleDateString(
+                                            "en-IN"
+                                        )
+                                        : "—";
+
+
+                                return `
+
+                                    <tr>
+
+                                        <td>
+                                            <strong>
+                                                ${booking.id}
+                                            </strong>
+                                        </td>
+
+                                        <td>
+                                            ${booking.studentName || "—"}
+                                            <br>
+                                            <small style="color:#6b7280;">
+                                                ${booking.studentEmail || ""}
+                                            </small>
+                                        </td>
+
+                                        <td>
+                                            ${booking.hostelName || "—"}
+                                            <br>
+                                            <small style="color:#6b7280;">
+                                                ${booking.location || ""}
+                                            </small>
+                                        </td>
+
+                                        <td>
+                                            ${booking.sharing || "—"}
+                                        </td>
+
+                                        <td>
+                                            ₹${Number(
+                                                booking.amount || 0
+                                            ).toLocaleString("en-IN")}
+                                        </td>
+
+                                        <td class="paid">
+                                            ✓ ${booking.paymentStatus || "Paid"}
+                                        </td>
+
+                                        <td>
+
+                                            <span class="confirmed">
+                                                ${booking.bookingStatus || "Confirmed"}
+                                            </span>
+
+                                        </td>
+
+                                        <td>
+                                            ${date}
+                                        </td>
+
+                                    </tr>
+
+                                `;
+
+                            }
+                        )
+                        .join("")
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+}
+
+
+renderBookings();
+
+</script>
+
+
+</body>
+
+</html>

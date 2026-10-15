@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Add Hostel | HostelHub</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+
+        .form-page {
+            padding: 30px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .form-header {
+            margin-bottom: 25px;
+        }
+
+        .form-header h1 {
+            margin-bottom: 5px;
+            color: #1f2937;
+        }
+
+        .form-header p {
+            color: #6b7280;
+        }
+
+        .hostel-form-card {
+            background: white;
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            margin-bottom: 18px;
+            color: #07549b;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 7px;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 11px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #07549b;
+            box-shadow: 0 0 0 2px rgba(7,84,155,0.1);
+        }
+
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .rent-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            padding: 10px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .amenity-item input {
+            accent-color: #07549b;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+        }
+
+        .cancel-btn {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .save-btn {
+            background: #07549b;
+            color: white;
+        }
+
+        .save-btn:hover {
+            background: #063f76;
+        }
+
+        .required {
+            color: #dc2626;
+        }
+
+        @media (max-width: 800px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .rent-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .amenities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .form-page {
+                padding: 18px 12px;
+            }
+
+            .hostel-form-card {
+                padding: 18px;
+            }
+
+            .rent-grid,
+            .amenities-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<button
+    class="sidebar-toggle"
+    onclick="toggleSidebar()">
+    ☰
+</button>
+
+
+<div class="dashboard-layout">
+
+
+    <!-- SIDEBAR -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+        style="background:#07549b;">
+
+        <div class="sidebar-brand">
+            🏠 HostelHub
+        </div>
+
+        <div class="sidebar-user" id="sidebarUser">
+            <strong>Hostel Owner</strong>
+        </div>
+
+        <nav>
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link">
+                📊 Dashboard
+            </a>
+
+            <a
+                href="rooms.html"
+                class="sidebar-link">
+                🛏️ Rooms
+            </a>
+
+            <a
+                href="residents.html"
+                class="sidebar-link">
+                👥 Residents
+            </a>
+
+            <a
+                href="allocations.html"
+                class="sidebar-link">
+                📋 Allocations
+            </a>
+
+            <a
+                href="payments.html"
+                class="sidebar-link">
+                💳 Payments
+            </a>
+
+            <a
+                href="complaints.html"
+                class="sidebar-link">
+                🛠️ Complaints
+            </a>
+
+            <a
+                href="announcements.html"
+                class="sidebar-link">
+                📢 Announcements
+            </a>
+
+            <a
+                href="hostels.html"
+                class="sidebar-link">
+                🏠 My Hostels
+            </a>
+
+            <a
+                href="booking.html"
+                class="sidebar-link">
+                📋 Bookings
+            </a>
+
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTENT -->
+
+    <main class="dashboard-content">
+
+        <div class="form-page">
+
+            <div class="form-header">
+
+                <h1 id="pageTitle">
+                    Add New Hostel
+                </h1>
+
+                <p>
+                    Add your PG or hostel so students
+                    can discover it on HostelHub.
+                </p>
+
+            </div>
+
+
+            <form
+                id="hostelForm"
+                class="hostel-form-card">
+
+
+                <!-- BASIC INFORMATION -->
+
+                <div class="form-section">
+
+                    <h2>
+                        🏠 Basic Information
+                    </h2>
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Hostel / PG Name
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="e.g. Airoli Student PG"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Gender
+                            </label>
+
+                            <select id="gender">
+
+                                <option value="Girls">
+                                    Girls
+                                </option>
+
+                                <option value="Boys">
+                                    Boys
+                                </option>
+
+                                <option value="Co-ed">
+                                    Co-ed
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                City
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                placeholder="e.g. Navi Mumbai"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Area / Location
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="area"
+                                placeholder="e.g. Sector 2, Airoli"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Nearby College
+                            </label>
+
+                            <input
+                                type="text"
+                                id="college"
+                                placeholder="e.g. Datta Meghe College of Engineering"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label>
+                                Description
+                            </label>
+
+                            <textarea
+                                id="description"
+                                placeholder="Describe your hostel, rooms, rules, surroundings, etc."
+                            ></textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RENT -->
+
+                <div class="form-section">
+
+                    <h2>
+                        💰 Monthly Rent
+                    </h2>
+
+                    <div class="rent-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Single
+                            </label>
+
+                            <input
+                                type="number"
+                                id="singleRent"
+                                min="0"
+                                placeholder="₹"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Double
+                            </label>
+
+                            <input
+                                type="number"
+                                id="doubleRent"
+                                min="0"
+                                placeholder="₹"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Triple
+                            </label>
+
+                            <input
+                                type="number"
+                                id="tripleRent"
+                                min="0"
+                                placeholder="₹"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                4 Sharing
+                            </label>
+
+                            <input
+                                type="number"
+                                id="fourRent"
+                                min="0"
+                                placeholder="₹"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AMENITIES -->
+
+                <div class="form-section">
+
+                    <h2>
+                        ✨ Facilities
+                    </h2>
+
+                    <div class="amenities-grid">
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Wi-Fi"
+                                class="amenity"
+                            >
+                            Wi-Fi
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Food"
+                                class="amenity"
+                            >
+                            Food
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="AC"
+                                class="amenity"
+                            >
+                            AC
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Laundry"
+                                class="amenity"
+                            >
+                            Laundry
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Parking"
+                                class="amenity"
+                            >
+                            Parking
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="CCTV"
+                                class="amenity"
+                            >
+                            CCTV
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Attached Bathroom"
+                                class="amenity"
+                            >
+                            Attached Bathroom
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Security"
+                                class="amenity"
+                            >
+                            Security
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Power Backup"
+                                class="amenity"
+                            >
+                            Power Backup
+                        </label>
+
+                        <label class="amenity-item">
+                            <input
+                                type="checkbox"
+                                value="Housekeeping"
+                                class="amenity"
+                            >
+                            Housekeeping
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- AVAILABILITY -->
+
+                <div class="form-section">
+
+                    <h2>
+                        🛏️ Availability
+                    </h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Available Beds
+                            </label>
+
+                            <input
+                                type="number"
+                                id="availableBeds"
+                                min="0"
+                                value="5"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Distance from College
+                            </label>
+
+                            <input
+                                type="number"
+                                id="distanceKm"
+                                min="0"
+                                step="0.1"
+                                placeholder="e.g. 0.5"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- IMAGE -->
+
+                <div class="form-section">
+
+                    <h2>
+                        📸 Hostel Photo
+                    </h2>
+
+                    <div class="form-grid">
+
+                        <div class="form-group full">
+
+                            <label>
+                                Image URL
+                            </label>
+
+                            <input
+                                type="url"
+                                id="image"
+                                placeholder="https://example.com/hostel-photo.jpg"
+                            >
+
+                            <small style="margin-top:6px;color:#6b7280;">
+                                You can paste a publicly accessible
+                                hostel/PG image URL.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="hostels.html"
+                        class="btn cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn save-btn">
+                        Save Hostel
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+
+requireAuth("admin");
+
+
+/* --------------------------------------------------
+   SIDEBAR
+-------------------------------------------------- */
+
+function toggleSidebar() {
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    if (sidebar) {
+
+        sidebar.classList.toggle("active");
+
+    }
+
+}
+
+
+/* --------------------------------------------------
+   GET ID FROM URL
+-------------------------------------------------- */
+
+const urlParams =
+    new URLSearchParams(window.location.search);
+
+const editId =
+    urlParams.get("id");
+
+
+/* --------------------------------------------------
+   GET HOSTELS
+-------------------------------------------------- */
+
+function getHostels() {
+
+    try {
+
+        return JSON.parse(
+            localStorage.getItem("pgs")
+        ) || [];
+
+    } catch (error) {
+
+        return [];
+
+    }
+
+}
+
+
+/* --------------------------------------------------
+   SET VALUE SAFELY
+-------------------------------------------------- */
+
+function setValue(id, value) {
+
+    const element =
+        document.getElementById(id);
+
+    if (element && value !== undefined) {
+
+        element.value = value;
+
+    }
+
+}
+
+
+/* --------------------------------------------------
+   EDIT MODE
+-------------------------------------------------- */
+
+if (editId) {
+
+    document.getElementById("pageTitle")
+        .textContent = "Edit Hostel";
+
+    const hostels = getHostels();
+
+    const hostel =
+        hostels.find(
+            item => item.id === editId
+        );
+
+    if (hostel) {
+
+        setValue("name", hostel.name);
+        setValue("city", hostel.city);
+        setValue("area", hostel.area);
+        setValue("college", hostel.college);
+        setValue("gender", hostel.gender);
+        setValue("description", hostel.description);
+        setValue("availableBeds", hostel.availableBeds);
+        setValue("distanceKm", hostel.distanceKm);
+        setValue("image", hostel.image);
+
+
+        if (hostel.sharing) {
+
+            setValue(
+                "singleRent",
+                hostel.sharing.single
+            );
+
+            setValue(
+                "doubleRent",
+                hostel.sharing.double
+            );
+
+            setValue(
+                "tripleRent",
+                hostel.sharing.triple
+            );
+
+            setValue(
+                "fourRent",
+                hostel.sharing.four
+            );
+
+        }
+
+
+        const amenities =
+            hostel.amenities || [];
+
+        document
+            .querySelectorAll(".amenity")
+            .forEach(function (checkbox) {
+
+                checkbox.checked =
+                    amenities.includes(
+                        checkbox.value
+                    );
+
+            });
+
+    }
+
+}
+
+
+/* --------------------------------------------------
+   FORM SUBMISSION
+-------------------------------------------------- */
+
+document
+    .getElementById("hostelForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document.getElementById("name")
+                .value.trim();
+
+        const city =
+            document.getElementById("city")
+                .value.trim();
+
+        const area =
+            document.getElementById("area")
+                .value.trim();
+
+
+        if (!name || !city || !area) {
+
+            alert(
+                "Please fill in the hostel name, city and area."
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------
+           RENT
+        ----------------------------- */
+
+        const sharing = {};
+
+
+        const single =
+            Number(
+                document.getElementById("singleRent")
+                    .value
+            );
+
+        const double =
+            Number(
+                document.getElementById("doubleRent")
+                    .value
+            );
+
+        const triple =
+            Number(
+                document.getElementById("tripleRent")
+                    .value
+            );
+
+        const four =
+            Number(
+                document.getElementById("fourRent")
+                    .value
+            );
+
+
+        if (single > 0) {
+            sharing.single = single;
+        }
+
+        if (double > 0) {
+            sharing.double = double;
+        }
+
+        if (triple > 0) {
+            sharing.triple = triple;
+        }
+
+        if (four > 0) {
+            sharing.four = four;
+        }
+
+
+        /* -----------------------------
+           AMENITIES
+        ----------------------------- */
+
+        const amenities =
+            Array.from(
+                document.querySelectorAll(
+                    ".amenity:checked"
+                )
+            ).map(
+                checkbox => checkbox.value
+            );
+
+
+        /* -----------------------------
+           CREATE HOSTEL OBJECT
+        ----------------------------- */
+
+        const hostels =
+            getHostels();
+
+
+        let hostel;
+
+
+        if (editId) {
+
+            hostel =
+                hostels.find(
+                    item => item.id === editId
+                );
+
+        }
+
+
+        if (!hostel) {
+
+            hostel = {
+
+                id:
+                    "owner-" +
+                    Date.now(),
+
+                source:
+                    "Owner Listed",
+
+                lastVerified:
+                    new Date()
+                        .toISOString()
+                        .split("T")[0]
+
+            };
+
+            hostels.push(hostel);
+
+        }
+
+
+        hostel.name = name;
+
+        hostel.city = city;
+
+        hostel.area = area;
+
+        hostel.college =
+            document.getElementById("college")
+                .value.trim();
+
+        hostel.gender =
+            document.getElementById("gender")
+                .value;
+
+        hostel.description =
+            document.getElementById("description")
+                .value.trim();
+
+        hostel.availableBeds =
+            Number(
+                document.getElementById("availableBeds")
+                    .value
+            ) || 0;
+
+        hostel.distanceKm =
+            Number(
+                document.getElementById("distanceKm")
+                    .value
+            ) || 0;
+
+        hostel.image =
+            document.getElementById("image")
+                .value.trim() ||
+            "../assets/images/room1.jpg";
+
+        hostel.sharing =
+            sharing;
+
+        hostel.amenities =
+            amenities;
+
+        hostel.foodAvailable =
+            amenities.includes("Food");
+
+        hostel.acAvailable =
+            amenities.includes("AC");
+
+        hostel.laundry =
+            amenities.includes("Laundry");
+
+        hostel.parking =
+            amenities.includes("Parking");
+
+        hostel.attachedBathroom =
+            amenities.includes("Attached Bathroom");
+
+
+        /* -----------------------------
+           SAVE
+        ----------------------------- */
+
+        localStorage.setItem(
+            "pgs",
+            JSON.stringify(hostels)
+        );
+
+
+        alert(
+            editId
+                ? "Hostel updated successfully!"
+                : "Hostel added successfully!"
+        );
+
+
+        window.location.href =
+            "hostels.html";
+
+    });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>HostelHub</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+   <header class="navbar">
+
+    <div class="logo">
+        🏠 HostelHub
+    </div>
+
+    <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="rooms.html">Rooms</a>
+        <a href="facilities.html">Facilities</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="applications.html">Applications</a>
+        <a href="admin/hostels.html">Owner Portal</a>
+        <a href="dashboard.html">Dashboard</a>
+    </nav>
+
+    <div class="nav-buttons" id="navButtons">
+
+        <a href="login.html" class="btn btn-outline">
+            Login
+        </a>
+
+        <a href="register.html" class="btn btn-primary">
+            Register
+        </a>
+
+    </div>
+    
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="hero-tag">
+            SMART PG & HOSTEL MANAGEMENT
+        </p>
+
+        <h1>
+            Find Your Perfect
+            <span>Hostel</span>
+        </h1>
+
+        <p class="hero-description">
+            Safe, affordable and comfortable
+            accommodation near your college.
+        </p>
+
+        <div class="hero-search">
+
+            <input
+                type="text"
+                id="collegeSearch"
+                placeholder="Enter your college name..."
+            >
+
+            <select id="roomTypeSearch">
+
+                <option value="all">
+                    All Room Types
+                </option>
+
+                <option value="single">
+                    Single Sharing
+                </option>
+
+                <option value="double">
+                    Double Sharing
+                </option>
+
+                <option value="triple">
+                    Triple Sharing
+                </option>
+
+            </select>
+
+            <button
+                class="btn btn-primary"
+                onclick="searchCollege()"
+            >
+                Search
+            </button>
+
+        </div>
+
+        <div id="heroSearchMessage" style="display: none; margin-top: 14px; max-width: 650px; margin-left: auto; margin-right: auto; text-align: left;"></div>
+
+        <button
+            class="location-btn"
+            onclick="useCurrentLocation()"
+        >
+            📍 Use My Current Location
+        </button>
+
+    </div>
+
+</section>
+<!-- =========================
+     QUICK FEATURES
+========================= -->
+
+<section class="features">
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🛏️
+        </div>
+
+        <div>
+            <h3>Rooms</h3>
+
+            <p>
+                Find and apply for available rooms.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            💳
+        </div>
+
+        <div>
+            <h3>Payments</h3>
+
+            <p>
+                Track your rent and payment history.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            🔧
+        </div>
+
+        <div>
+            <h3>Maintenance</h3>
+
+            <p>
+                Report complaints and maintenance issues.
+            </p>
+        </div>
+
+    </div>
+
+
+    <div class="feature-card">
+
+        <div class="feature-icon">
+            📢
+        </div>
+
+        <div>
+            <h3>Announcements</h3>
+
+            <p>
+                Stay updated with hostel news.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================
+     FEATURED ROOMS
+========================= -->
+<section class="featured-rooms" id="rooms">
+    <div class="section-header">
+        <div>
+            <p class="section-tag">
+                EXPLORE OUR ROOMS
+            </p>
+            <h2>
+                Featured Rooms
+            </h2>
+            <p class="section-description">
+                Comfortable rooms designed for
+                students and working professionals.
+            </p>
+        </div>
+        <a
+            href="rooms.html"
+            class="view-all"
+        >
+            View All Rooms →
+        </a>
+    </div>
+    <div class="rooms-grid">
+
+        <!-- Room 1 -->
+        <div class="room-card">
+            <div class="room-image">
+                <img
+                    src="assets/images/room1.jpg"
+                    alt="Single sharing room"
+                >
+                <span class="room-status available">
+                    Available
+                </span>
+            </div>
+            <div class="room-content">
+                <h3>Room 101</h3>
+                <p class="room-type">
+                    Single Sharing • 1st Floor
+                </p>
+                <p class="room-rent">
+                    ₹6,000
+                    <span>/ month</span>
+                </p>
+                <div class="room-info">
+                    <span>👤 1 Person</span>
+                    <span>✓ Available</span>
+                </div>
+                <a
+                    href="room-details.html?id=101"
+                    class="room-button"
+                >
+                    View Details
+                </a>
+            </div>
+        </div>
+
+        <!-- Room 2 -->
+        <div class="room-card">
+            <div class="room-image">
+                <img
+                    src="assets/images/room2.jpg"
+                    alt="Triple sharing room"
+                >
+                <span class="room-status available">
+                    Available
+                </span>
+            </div>
+            <div class="room-content">
+                <h3>Room 205</h3>
+                <p class="room-type">
+                    Triple Sharing • 2nd Floor
+                </p>
+                <p class="room-rent">
+                    ₹4,500
+                    <span>/ month</span>
+                </p>
+                <div class="room-info">
+                    <span>👤 2/3 Occupied</span>
+                    <span>✓ Available</span>
+                </div>
+                <a
+                    href="room-details.html?id=205"
+                    class="room-button"
+                >
+                    View Details
+                </a>
+            </div>
+        </div>
+
+        <!-- Room 3 -->
+        <div class="room-card">
+            <div class="room-image">
+                <img
+                    src="assets/images/room3.jpg"
+                    alt="Double sharing room"
+                >
+                <span class="room-status partial">
+                    Partial
+                </span>
+            </div>
+            <div class="room-content">
+                <h3>Room 308</h3>
+                <p class="room-type">
+                    Double Sharing • 3rd Floor
+                </p>
+                <p class="room-rent">
+                    ₹5,500
+                    <span>/ month</span>
+                </p>
+                <div class="room-info">
+                    <span>👤 2/2 Occupied</span>
+                    <span>⚠ Partial</span>
+                </div>
+                <a
+                    href="room-details.html?id=308"
+                    class="room-button"
+                >
+                    View Details
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="why-hostelhub">
+
+    <div class="why-header">
+
+        <p class="section-tag">
+            WHY HOSTELHUB
+        </p>
+
+        <h2>
+            Everything You Need,
+            <span>In One Place</span>
+        </h2>
+
+        <p>
+            HostelHub makes finding and managing student
+            accommodation simple, safe and convenient.
+        </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                📍
+            </div>
+
+            <h3>
+                Find Nearby
+            </h3>
+
+            <p>
+                Discover PGs and hostels near your
+                college using location-based search.
+            </p>
+
+        </div>
+        <div class="why-card">
+            <div class="why-icon">
+                🛡️
+            </div>
+            <h3>
+                Safe & Reliable
+            </h3>
+            <p>
+                Get important accommodation details
+                before choosing your room.
+            </p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon">
+                💳
+            </div>
+            <h3>
+                Easy Payments
+            </h3>
+            <p>
+                Track your rent, payment status and
+                payment history easily.
+            </p>
+        </div>
+        <div class="why-card">
+            <div class="why-icon">
+                🔧
+            </div>
+            <h3>
+                Quick Support
+            </h3>
+            <p>
+                Raise maintenance complaints and
+                track their resolution status.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <p class="section-tag">
+            READY TO FIND YOUR SPACE?
+        </p>
+
+        <h2>
+            Your Next Home Is
+            <span>Just a Search Away.</span>
+        </h2>
+
+        <p>
+            Explore comfortable and affordable rooms
+            near your college today.
+        </p>
+
+        <div class="cta-buttons">
+
+            <a href="rooms.html" class="btn btn-primary">
+                Explore Rooms
+            </a>
+
+            <a href="register.html" class="btn btn-outline">
+                Create Account
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+    <footer class="footer">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    🏠 HostelHub
+                </div>
+
+                <p>
+                    Smart, simple and reliable accommodation
+                    management for students.
+                </p>
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Quick Links</h3>
+
+                <a href="index.html">Home</a>
+                <a href="rooms.html">Rooms</a>
+                <a href="#facilities.html">Facilities</a>
+                <a href="#about.html">About</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Student</h3>
+
+                <a href="login.html">Login</a>
+                <a href="register.html">Register</a>
+                <a href="rooms.html">Find a Room</a>
+                <a href="#">Help & Support</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h3>Contact</h3>
+
+                <p>📧 support@hostelhub.com</p>
+                <p>📞 +91 98765 43210</p>
+                <p>📍 Mumbai, Maharashtra</p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 HostelHub. All rights reserved.
+            </p>
+
+            <p>
+                Smart PG & Hostel Management System
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+</html>

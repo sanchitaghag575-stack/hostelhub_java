@@ -1,0 +1,265 @@
+/* ============================================================
+   HostelHub — Location / Map Page
+   ============================================================ */
+
+.location-page {
+    min-height: 100vh;
+    background: #f0f4f8;
+}
+
+/* ── Search Header ───────────────────────────────────────── */
+
+.location-header {
+    background: linear-gradient(135deg, #146fc1, #07549b);
+    color: #fff;
+    padding: 40px 24px 28px;
+    text-align: center;
+}
+
+.location-header h1 {
+    font-size: 1.8rem;
+    margin: 0 0 8px;
+}
+
+.location-header p {
+    margin: 0 0 24px;
+    opacity: 0.85;
+    font-size: 0.95rem;
+}
+
+.location-search-bar {
+    display: flex;
+    gap: 10px;
+    max-width: 620px;
+    margin: 0 auto 12px;
+}
+
+.location-search-bar input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+    color: #172b4d;
+    outline: none;
+}
+
+.location-search-bar input:focus {
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+}
+
+.location-search-bar button {
+    padding: 12px 22px;
+    background: #20a66a;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.location-search-bar button:hover {
+    background: #178055;
+}
+
+.use-location-btn {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.18s;
+}
+
+.use-location-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.college-suggestions {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 620px;
+    margin: 6px auto 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    display: none;
+}
+
+.college-suggestion-item {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #172b4d;
+    border-bottom: 1px solid #f0f4f8;
+    transition: background 0.15s;
+}
+
+.college-suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.college-suggestion-item:hover {
+    background: #eef7ff;
+    color: #146fc1;
+}
+
+/* ── Map + Results Layout ────────────────────────────────── */
+
+.location-layout {
+    display: flex;
+    height: calc(100vh - 240px);
+    min-height: 400px;
+}
+
+.location-sidebar {
+    width: 360px;
+    background: #fff;
+    overflow-y: auto;
+    border-right: 1px solid #e8eef5;
+    flex-shrink: 0;
+}
+
+.location-sidebar-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid #e8eef5;
+    background: #f8fafc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-sidebar-header h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #172b4d;
+    margin: 0;
+}
+
+.location-sidebar-header .result-count {
+    font-size: 0.78rem;
+    color: #667085;
+}
+
+#map {
+    flex: 1;
+    z-index: 1;
+}
+
+/* ── PG / Hostel Cards in Sidebar ────────────────────────── */
+
+.hostel-card {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f0f4f8;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.hostel-card:hover,
+.hostel-card.highlighted {
+    background: #eef7ff;
+}
+
+.hostel-card h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #172b4d;
+    margin: 0 0 4px;
+}
+
+.hostel-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.hostel-meta-tag {
+    background: #f0f4f8;
+    color: #344054;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.hostel-meta-tag.gender-girls { background: #fdf2f8; color: #9d174d; }
+.hostel-meta-tag.gender-boys  { background: #eff6ff; color: #1e40af; }
+.hostel-meta-tag.gender-mixed { background: #f3f0ff; color: #5b21b6; }
+
+.hostel-card .hostel-rent {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #146fc1;
+}
+
+.hostel-card .hostel-distance {
+    font-size: 0.78rem;
+    color: #667085;
+    margin-top: 4px;
+}
+
+.hostel-facilities-mini {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.hostel-facility-mini {
+    background: #effaf5;
+    color: #065f46;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.72rem;
+}
+
+/* ── Leaflet popup custom style ──────────────────────────── */
+
+.custom-popup h4 {
+    font-size: 0.95rem;
+    color: #172b4d;
+    margin: 0 0 6px;
+}
+
+.custom-popup p {
+    font-size: 0.82rem;
+    color: #344054;
+    margin: 0 0 4px;
+}
+
+.custom-popup .popup-rent {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #146fc1;
+}
+
+.custom-popup a {
+    display: inline-block;
+    margin-top: 8px;
+    background: #146fc1;
+    color: #fff;
+    padding: 5px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+/* ── No results ──────────────────────────────────────────── */
+
+.no-results-msg {
+    text-align: center;
+    padding: 40px 20px;
+    color: #667085;
+    font-size: 0.9rem;
+}
+
+.no-results-msg .no-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 10px;
+}

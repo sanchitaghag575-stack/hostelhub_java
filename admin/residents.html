@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residents | HostelHub Admin</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+<div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar" style="background:#07549b;">
+        <div class="sidebar-brand">🏠 Admin Panel</div>
+        <div class="sidebar-user" id="sidebarUser"></div>
+        <nav>
+            <a href="dashboard.html"     class="sidebar-link">📊 Dashboard</a>
+            <a href="rooms.html"         class="sidebar-link">🛏 Rooms</a>
+            <a href="residents.html"     class="sidebar-link">👥 Residents</a>
+            <a href="allocations.html"   class="sidebar-link">📋 Allocations</a>
+            <a href="payments.html"      class="sidebar-link">💳 Payments</a>
+            <a href="complaints.html"    class="sidebar-link">🔧 Complaints</a>
+            <a href="announcements.html" class="sidebar-link">📢 Announcements</a>
+            <a href="hostels.html"       class="sidebar-link">🏠 My Hostels</a>
+            <a href="booking.html"       class="sidebar-link">📋 Bookings</a>
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+        </nav>
+        <div style="padding:16px 20px;margin-top:auto;border-top:1px solid rgba(255,255,255,0.1);">
+            <button onclick="resetDemoData()" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);padding:7px 14px;border-radius:6px;font-size:0.78rem;cursor:pointer;width:100%;">🔄 Reset Demo Data</button>
+        </div>
+    </aside>
+    <div class="dashboard-content">
+        <div class="dashboard-topbar">
+            <span class="topbar-title">Residents</span>
+            <span class="topbar-user" id="topbarUser"></span>
+        </div>
+        <main class="dashboard-main">
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>All Students</h2>
+                    <span id="residentCount" style="font-size:0.82rem;color:#667085;"></span>
+                </div>
+                <div class="panel-body" style="padding:16px;">
+                    <input type="text" id="residentSearch" placeholder="🔍 Search by name or email..." style="width:100%;max-width:380px;padding:9px 14px;border:1px solid #dbe5ef;border-radius:8px;font-size:0.9rem;margin-bottom:16px;">
+                </div>
+                <div style="overflow-x:auto;">
+                    <table class="data-table">
+                        <thead>
+                            <tr><th>Name</th><th>Email</th><th>Room</th><th>Phone</th><th>College</th><th>Status</th></tr>
+                        </thead>
+                        <tbody id="residentsTableBody">
+                            <tr><td colspan="6" style="text-align:center;padding:32px;color:#667085;">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

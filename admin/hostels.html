@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Hostels | HostelHub</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        .hostel-page {
+            padding: 30px;
+        }
+
+        .hostel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .hostel-header h1 {
+            margin: 0;
+            color: #1f2937;
+        }
+
+        .hostel-header p {
+            margin-top: 6px;
+            color: #6b7280;
+        }
+
+        .add-hostel-btn {
+            background: #07549b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .add-hostel-btn:hover {
+            background: #063f76;
+        }
+
+        .hostel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+        }
+
+        .hostel-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+        }
+
+        .hostel-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: #e5e7eb;
+        }
+
+        .hostel-info {
+            padding: 18px;
+        }
+
+        .hostel-info h3 {
+            margin: 0 0 7px;
+            color: #111827;
+        }
+
+        .hostel-location {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .hostel-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #07549b;
+        }
+
+        .hostel-price span {
+            font-size: 13px;
+            font-weight: 400;
+            color: #6b7280;
+        }
+
+        .hostel-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 14px 0;
+        }
+
+        .hostel-tag {
+            background: #eef5fb;
+            color: #07549b;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .hostel-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .hostel-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .hostel-actions button {
+            flex: 1;
+            padding: 9px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .empty-state {
+            background: white;
+            border-radius: 14px;
+            padding: 50px 20px;
+            text-align: center;
+            color: #6b7280;
+            border: 1px dashed #d1d5db;
+        }
+
+        .empty-state h3 {
+            color: #374151;
+        }
+
+        @media (max-width: 700px) {
+            .hostel-page {
+                padding: 20px 15px;
+            }
+
+            .hostel-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .add-hostel-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar" style="background:#07549b;">
+
+        <div class="sidebar-brand">
+            🏠 HostelHub
+        </div>
+
+        <div class="sidebar-user" id="sidebarUser">
+            <strong>Hostel Owner</strong>
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html" class="sidebar-link">
+                📊 Dashboard
+            </a>
+
+            <a href="rooms.html" class="sidebar-link">
+                🛏️ Rooms
+            </a>
+
+            <a href="residents.html" class="sidebar-link">
+                👥 Residents
+            </a>
+
+            <a href="allocations.html" class="sidebar-link">
+                📋 Allocations
+            </a>
+
+            <a href="payments.html" class="sidebar-link">
+                💳 Payments
+            </a>
+
+            <a href="complaints.html" class="sidebar-link">
+                🛠️ Complaints
+            </a>
+
+            <a href="announcements.html" class="sidebar-link">
+                📢 Announcements
+            </a>
+
+            <a href="hostels.html" class="sidebar-link">
+                🏠 My Hostels
+            </a>
+
+            <a href="booking.html" class="sidebar-link">
+                📋 Bookings
+            </a>
+
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dashboard-content">
+
+        <div class="hostel-page">
+
+            <div class="hostel-header">
+
+                <div>
+                    <h1>My Hostels</h1>
+                    <p>Manage your PG and hostel listings.</p>
+                </div>
+
+                <a href="hostel-form.html" class="add-hostel-btn">
+                    + Add New Hostel
+                </a>
+
+            </div>
+
+            <div id="hostelGrid" class="hostel-grid"></div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+<script>
+
+requireAuth("admin");
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+
+    if (sidebar) {
+        sidebar.classList.toggle("active");
+    }
+}
+
+
+/* --------------------------------------------------
+   HOSTEL DATA
+-------------------------------------------------- */
+
+function getHostels() {
+
+    try {
+
+        const pgs = JSON.parse(
+            localStorage.getItem("pgs")
+        ) || [];
+
+        return pgs;
+
+    } catch (error) {
+
+        console.error("Could not read hostel data:", error);
+
+        return [];
+    }
+}
+
+
+/* --------------------------------------------------
+   GET CHEAPEST RENT
+-------------------------------------------------- */
+
+function getStartingRent(hostel) {
+
+    if (!hostel.sharing) {
+        return 0;
+    }
+
+    const rents = Object.values(hostel.sharing)
+        .filter(value => Number(value) > 0)
+        .map(value => Number(value));
+
+    if (!rents.length) {
+        return 0;
+    }
+
+    return Math.min(...rents);
+}
+
+
+/* --------------------------------------------------
+   RENDER HOSTELS
+-------------------------------------------------- */
+
+function renderHostels() {
+
+    const grid = document.getElementById("hostelGrid");
+
+    const hostels = getHostels();
+
+    if (!hostels.length) {
+
+        grid.innerHTML = `
+            <div class="empty-state">
+
+                <h3>No hostel listings yet</h3>
+
+                <p>
+                    Add your first hostel or PG listing
+                    to make it visible to students.
+                </p>
+
+                <br>
+
+                <a href="hostel-form.html"
+                   class="add-hostel-btn">
+                    + Add Hostel
+                </a>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    grid.innerHTML = hostels.map(hostel => {
+
+        const rent = getStartingRent(hostel);
+
+        const image =
+            hostel.image ||
+            "../assets/images/room1.jpg";
+
+        const amenities =
+            hostel.amenities || [];
+
+
+        return `
+
+            <div class="hostel-card">
+
+                <img
+                    class="hostel-image"
+                    src="${image}"
+                    alt="${hostel.name}"
+                    onerror="this.src='../assets/images/room1.jpg'"
+                >
+
+                <div class="hostel-info">
+
+                    <span class="hostel-status">
+                        ✓ Available
+                    </span>
+
+                    <h3>${hostel.name || "Unnamed Hostel"}</h3>
+
+                    <div class="hostel-location">
+                        📍 ${hostel.area || hostel.city || "Location not specified"}
+                    </div>
+
+                    <div class="hostel-price">
+                        ₹${rent.toLocaleString("en-IN")}
+                        <span>/ month onwards</span>
+                    </div>
+
+                    <div class="hostel-tags">
+
+                        ${
+                            hostel.gender
+                            ? `<span class="hostel-tag">${hostel.gender}</span>`
+                            : ""
+                        }
+
+                        ${
+                            hostel.college
+                            ? `<span class="hostel-tag">🎓 ${hostel.college}</span>`
+                            : ""
+                        }
+
+                        ${
+                            amenities.slice(0, 3)
+                            .map(a => `
+                                <span class="hostel-tag">
+                                    ${a}
+                                </span>
+                            `)
+                            .join("")
+                        }
+
+                    </div>
+
+                    <div class="hostel-actions">
+
+                        <button
+                            class="edit-btn"
+                            onclick="editHostel('${hostel.id}')">
+                            Edit
+                        </button>
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteHostel('${hostel.id}')">
+                            Delete
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+    }).join("");
+}
+
+
+/* --------------------------------------------------
+   EDIT
+-------------------------------------------------- */
+
+function editHostel(id) {
+
+    window.location.href =
+        "hostel-form.html?id=" +
+        encodeURIComponent(id);
+}
+
+
+/* --------------------------------------------------
+   DELETE
+-------------------------------------------------- */
+
+function deleteHostel(id) {
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to delete this hostel listing?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const hostels = getHostels();
+
+    const updatedHostels =
+        hostels.filter(hostel => hostel.id !== id);
+
+    localStorage.setItem(
+        "pgs",
+        JSON.stringify(updatedHostels)
+    );
+
+    renderHostels();
+
+}
+
+
+/* --------------------------------------------------
+   INITIAL LOAD
+-------------------------------------------------- */
+
+renderHostels();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements | HostelHub Admin</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+<div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar" style="background:#07549b;">
+        <div class="sidebar-brand">🏠 Admin Panel</div>
+        <div class="sidebar-user" id="sidebarUser"></div>
+        <nav>
+            <a href="dashboard.html"     class="sidebar-link">📊 Dashboard</a>
+            <a href="rooms.html"         class="sidebar-link">🛏 Rooms</a>
+            <a href="residents.html"     class="sidebar-link">👥 Residents</a>
+            <a href="allocations.html"   class="sidebar-link">📋 Allocations</a>
+            <a href="payments.html"      class="sidebar-link">💳 Payments</a>
+            <a href="complaints.html"    class="sidebar-link">🔧 Complaints</a>
+            <a href="announcements.html" class="sidebar-link">📢 Announcements</a>
+            <a href="hostels.html"       class="sidebar-link">🏠 My Hostels</a>
+            <a href="booking.html"       class="sidebar-link">📋 Bookings</a>
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+        </nav>
+        <div style="padding:16px 20px;margin-top:auto;border-top:1px solid rgba(255,255,255,0.1);">
+            <button onclick="resetDemoData()" style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.2);padding:7px 14px;border-radius:6px;font-size:0.78rem;cursor:pointer;width:100%;">🔄 Reset Demo Data</button>
+        </div>
+    </aside>
+    <div class="dashboard-content">
+        <div class="dashboard-topbar">
+            <span class="topbar-title">Announcements</span>
+            <span class="topbar-user" id="topbarUser"></span>
+        </div>
+        <main class="dashboard-main">
+            <div id="messageContainer"></div>
+
+            <!-- Post Form -->
+            <div class="panel" style="margin-bottom:24px;">
+                <div class="panel-header"><h2>📢 Post New Announcement</h2></div>
+                <div class="panel-body">
+                    <form id="announcementForm">
+                        <div class="form-group-d">
+                            <label>Title *</label>
+                            <input type="text" id="annTitle" placeholder="e.g. Mess Timing Updated">
+                        </div>
+                        <div class="form-group-d">
+                            <label>Description *</label>
+                            <textarea id="annDesc" rows="4" placeholder="Write the full announcement here..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-dashboard btn-blue" style="padding:10px 28px;">Post Announcement</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Announcement List -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Posted Announcements</h2>
+                    <span id="annCount" style="font-size:0.82rem;color:#667085;"></span>
+                </div>
+                <div class="panel-body" id="adminAnnList">
+                    <div class="empty-state"><span class="empty-icon">📢</span><p>Loading...</p></div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | HostelHub</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+   <header class="navbar">
+
+        <div class="logo">
+            🏠 HostelHub
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="rooms.html">Rooms</a>
+            <a href="facilities.html">Facilities</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="applications.html">Applications</a>
+            <a href="dashboard.html">Dashboard</a>
+            <span id="loginStatus"></span>
+            <a href="#" onclick="logoutUser()">Logout</a>
+        </nav>
+
+        <div class="nav-buttons">
+
+            <a href="login.html" class="btn btn-outline">
+                Login
+            </a>
+
+            <a href="register.html" class="btn btn-primary">
+                Register
+            </a>
+
+        </div>
+        
+    </header>
+
+
+    <div class="application-container">
+
+        <div class="application-header">
+            <h1>Welcome, <span id="dashboardUserName">User</span>!</h1>
+            <p>Overview of hostel room applications.</p>
+        </div>
+
+        <div class="dashboard-stats">
+
+            <div class="dashboard-card">
+                <h3>Total Applications</h3>
+                <strong id="totalApplications">0</strong>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Pending</h3>
+                <strong id="pendingApplications">0</strong>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Approved</h3>
+                <strong id="approvedApplications">0</strong>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Rejected</h3>
+                <strong id="rejectedApplications">0</strong>
+            </div>
+
+        </div>
+        <div id="dashboardApplications"></div>
+    </div>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

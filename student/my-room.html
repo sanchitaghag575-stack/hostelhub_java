@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Room | HostelHub</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+<div class="dashboard-layout">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">🏠 HostelHub</div>
+        <div class="sidebar-user" id="sidebarUser"></div>
+        <nav>
+            <a href="dashboard.html"     class="sidebar-link">📊 Dashboard</a>
+            <a href="my-room.html"       class="sidebar-link">🛏 My Room</a>
+            <a href="../rooms.html"      class="sidebar-link">🏠 Browse Rooms</a>
+            <a href="payments.html"      class="sidebar-link">💳 Payments</a>
+            <a href="complaints.html"    class="sidebar-link">🔧 Complaints</a>
+            <a href="announcements.html" class="sidebar-link">📢 Announcements</a>
+            <a href="profile.html"       class="sidebar-link">👤 Profile</a>
+            <button onclick="logoutUser()" class="sidebar-link sidebar-logout">🚪 Logout</button>
+        </nav>
+    </aside>
+
+    <div class="dashboard-content">
+        <div class="dashboard-topbar">
+            <span class="topbar-title">My Room</span>
+            <span class="topbar-user" id="topbarUser"></span>
+        </div>
+        <main class="dashboard-main">
+            <div id="myRoomContent">
+                <div class="empty-state"><span class="empty-icon">🛏</span><p>Loading...</p></div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/storage.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/student.js"></script>
+</body>
+</html>
